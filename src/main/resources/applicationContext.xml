@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+xmlns:context="http://www.springframework.org/schema/context"
+xmlns:aop="http://www.springframework.org/schema/aop"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+                    http://www.springframework.org/schema/beans/spring-beans.xsd
+                    http://www.springframework.org/schema/context
+                    http://www.springframework.org/schema/context/spring-context.xsd
+                    http://www.springframework.org/schema/aop
+                    http://www.springframework.org/schema/aop/spring-aop.xsd">
+<!--通过构造方法来进行注入的相关配置-->
+    <bean id="userDao" class="com.boss.learning.springdemo.dao.UserDao"></bean>
+    <bean id="userService" class="com.boss.learning.springdemo.service.UserService"  init-method="init" destroy-method="destory">
+        <constructor-arg ref="userDao"></constructor-arg>
+    </bean>
+    <bean id="sysService" class="com.boss.learning.springdemo.service.impl.SysServiceImpl">
+        <property name="userDao" ref="userDao"></property>
+    </bean>
+
+    <bean id="student" class="com.boss.learning.springdemo.bean.Student">
+        <property name="name" value="张三"></property>
+        <property name="age" value="14"></property>
+        <property name="adress">
+            <list>
+                <value>西安</value>
+                <value>天津</value>
+            </list>
+        </property>
+    </bean>
+</beans>
